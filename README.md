@@ -4,12 +4,25 @@ Website and client portal for Pixential, a web agency. The public site shows ser
 
 Live site: https://pixential.netlify.app (front end on Netlify, API on Render at https://pixential-api.onrender.com, database on Neon Postgres).
 
+
+![Home page](docs/home.webp)
+
+| Pricing | Client portal |
+| --- | --- |
+| ![Pricing](docs/pricing.webp) | ![Client portal](docs/client-portal.webp) |
+
+| Admin dashboard | Managing a client |
+| --- | --- |
+| ![Admin dashboard](docs/admin.webp) | ![Client page in the admin panel](docs/admin-client.webp) |
+
+The admin and portal screenshots use sample data.
+
 ## Stack
 
 - Frontend: Next.js 14.2 (App Router), Tailwind CSS, Framer Motion
 - Backend: Node.js, Express, Prisma
-- Database: SQLite for local development (switch the Prisma provider to MySQL or Postgres for production)
-- File storage: local `backend/uploads` folder, or S3 when AWS keys are set
+- Database: SQLite for local development, Postgres (Neon) in production
+- File storage: local `backend/uploads` folder, the database (`FILE_STORE=db`, used on Render), or S3 when AWS keys are set
 - Auth: JWT with ADMIN and CLIENT roles, bcrypt passwords, rate limited login
 
 ## What it does

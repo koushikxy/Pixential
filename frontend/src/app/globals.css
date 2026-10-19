@@ -25,6 +25,13 @@
   html:has(.portal) {
     font-size: 100%;
   }
+  .portal {
+    color-scheme: light;
+  }
+  .portal :is(input, select, textarea) {
+    background-color: #fff;
+    color: #111827;
+  }
 }
 
 @layer utilities {
