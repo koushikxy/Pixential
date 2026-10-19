@@ -1,5 +1,13 @@
 # Going live
 
+## Current setup
+
+- Front end: Netlify, https://pixential.netlify.app. Set `NEXT_PUBLIC_API_URL` there to turn on the login links and send the contact form to the backend.
+- Backend: Render, from `render.yaml` (Blueprint). The build switches Prisma to Postgres, and every start runs `prisma db push` and the admin seed.
+- Database: Neon Postgres. Use the direct connection string (connection pooling off) for `DATABASE_URL`.
+- Files: stored in the database (`FILE_STORE=db`) because Render's free disk is wiped on every deploy.
+- The free Render plan sleeps after 15 minutes without traffic, so the first request after that takes about a minute.
+
 ## Where to host
 
 - **Frontend:** Vercel (free plan works). Set the root directory to `frontend`.

@@ -84,3 +84,8 @@ model Lead {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model FileBlob {
+  key  String @id
+  data Bytes
+}
