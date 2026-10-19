@@ -1,36 +1,25 @@
+require('dotenv').config();
 const { PrismaClient } = require('@prisma/client');
 const bcrypt = require('bcryptjs');
 
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('Seeding default Admin user...');
+  const email = process.env.ADMIN_EMAIL;
+  const password = process.env.ADMIN_PASSWORD;
+  if (!email || !password) throw new Error('Set ADMIN_EMAIL and ADMIN_PASSWORD in .env');
 
-  const hashedPassword = await bcrypt.hash('password123', 10);
-
-  const admin = await prisma.user.upsert({
-    where: { email: 'admin@agencyx.com' },
+  await prisma.user.upsert({
+    where: { email },
     update: {},
-    create: {
-      email: 'admin@agencyx.com',
-      password: hashedPassword,
-      role: 'ADMIN',
-    },
+    create: { email, name: 'Admin', password: await bcrypt.hash(password, 10), role: 'ADMIN' },
   });
-
-  console.log('\n✅ Admin user successfully seeded!');
-  console.log('-----------------------------------');
-  console.log(`Email: ${admin.email}`);
-  console.log(`Password: password123`);
-  console.log(`Role: ${admin.role}`);
-  console.log('-----------------------------------\n');
+  console.log(`Admin ready: ${email}`);
 }
 
 main()
   .catch((e) => {
-    console.error('Failed to seed database:', e);
+    console.error(e.message);
     process.exit(1);
   })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+  .finally(() => prisma.$disconnect());

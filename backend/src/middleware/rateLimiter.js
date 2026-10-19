@@ -1,14 +1,16 @@
 const rateLimit = require('express-rate-limit');
 
-const apiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  limit: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
-  standardHeaders: 'draft-7', // draft-6: `RateLimit-*` headers; draft-7: combined `RateLimit` header
-  legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
-  message: {
-    status: 429,
-    message: 'Too many requests from this IP, please try again after 15 minutes'
-  }
-});
+const limiter = (limit, message) =>
+  rateLimit({
+    windowMs: 15 * 60 * 1000,
+    limit: process.env.NODE_ENV === 'test' ? 10000 : limit,
+    standardHeaders: 'draft-7',
+    legacyHeaders: false,
+    message: { message },
+  });
 
-module.exports = { apiLimiter };
+const apiLimiter = limiter(300, 'Too many requests, please try again in 15 minutes');
+const loginLimiter = limiter(10, 'Too many login attempts, please try again in 15 minutes');
+const leadLimiter = limiter(5, 'Too many messages sent, please try again later');
+
+module.exports = { apiLimiter, loginLimiter, leadLimiter };

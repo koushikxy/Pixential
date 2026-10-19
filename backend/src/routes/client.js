@@ -1,13 +1,22 @@
 const express = require('express');
-const { getClients, createClient } = require('../controllers/clientController');
+const c = require('../controllers/clientController');
+const m = require('../controllers/milestoneController');
+const { uploadFile } = require('../controllers/fileController');
 const { authenticateToken, authorizeRole } = require('../middleware/auth');
+const { route } = require('../utils/http');
 
 const router = express.Router();
+const admin = authorizeRole(['ADMIN']);
 
-// Only authenticated admins and clients can access these routes
 router.use(authenticateToken);
 
-router.get('/', authorizeRole(['ADMIN', 'CLIENT']), getClients);
-router.post('/', authorizeRole(['ADMIN']), createClient); // Only Admin can create
+router.get('/me', authorizeRole(['CLIENT']), route(c.getMyClient));
+router.get('/', admin, route(c.getClients));
+router.post('/', admin, route(c.createClient));
+router.get('/:id', route(c.getClient));
+router.put('/:id', admin, route(c.updateClient));
+router.delete('/:id', admin, route(c.deleteClient));
+router.post('/:id/milestones', admin, route(m.createMilestone));
+router.post('/:id/files', express.raw({ type: () => true, limit: '20mb' }), route(uploadFile));
 
 module.exports = router;

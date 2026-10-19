@@ -5,5 +5,13 @@
   "workspaces": [
     "frontend",
     "backend"
-  ]
+  ],
+  "scripts": {
+    "setup": "npm run setup -w backend",
+    "backend": "npm run dev -w backend",
+    "frontend": "npm run dev -w frontend",
+    "test": "npm test -w backend",
+    "build": "npm run build -w frontend",
+    "start": "npm run start -w frontend"
+  }
 }

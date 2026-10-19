@@ -1,28 +1,31 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
+const readRole = (token?: string) => {
+  try {
+    const payload = JSON.parse(atob(token!.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')));
+    return payload.exp * 1000 > Date.now() ? (payload.role as string) : null;
+  } catch {
+    return null;
+  }
+};
+
 export function middleware(request: NextRequest) {
-  const token = request.cookies.get('token')?.value;
+  const { pathname } = request.nextUrl;
+  const role = readRole(request.cookies.get('token')?.value);
+  const home = role === 'ADMIN' ? '/admin' : '/client';
 
-  // Protect all /admin and /client routes
-  if (request.nextUrl.pathname.startsWith('/admin') || request.nextUrl.pathname.startsWith('/client')) {
-    if (!token) {
-      return NextResponse.redirect(new URL('/login', request.url));
-    }
+  if (!role) {
+    const response = NextResponse.redirect(new URL('/login', request.url));
+    response.cookies.delete('token');
+    return response;
   }
-
-  // Prevent authenticated users from seeing the login page
-  if (request.nextUrl.pathname === '/login') {
-    if (token) {
-      // Ideal implementation would decode JWT here to check role and redirect to /admin or /client appropriately
-      return NextResponse.redirect(new URL('/client', request.url));
-    }
-  }
+  const needed = pathname.startsWith('/admin') ? 'ADMIN' : 'CLIENT';
+  if (role !== needed) return NextResponse.redirect(new URL(home, request.url));
 
   return NextResponse.next();
 }
 
-// Specify the paths where the middleware should run
 export const config = {
-  matcher: ['/admin/:path*', '/client/:path*', '/login'],
+  matcher: ['/admin/:path*', '/client/:path*'],
 };

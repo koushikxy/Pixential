@@ -1,51 +1,54 @@
-# AgencyX Platform Monorepo
+# Pixential Platform
 
-Welcome to the AgencyX platform. This is a full-stack monorepo designed for a high-performance web solutions agency.
+Website and client portal for Pixential, a web agency. The public site shows services, work and pricing. Behind the login there is an admin panel for managing clients and leads, and a portal where each client can follow their project and share files.
 
-## 🏗️ Architecture
+## Stack
 
-- **Frontend:** Next.js (App Router), Tailwind CSS, Framer Motion
-- **Backend:** Node.js, Express, Prisma (MySQL), Redis
-- **Infrastructure:** Docker, AWS S3
-- **Security:** JWT Authentication, RBAC, Helmet, Rate Limiting
+- Frontend: Next.js 14.2 (App Router), Tailwind CSS, Framer Motion
+- Backend: Node.js, Express, Prisma
+- Database: SQLite for local development (switch the Prisma provider to MySQL or Postgres for production)
+- File storage: local `backend/uploads` folder, or S3 when AWS keys are set
+- Auth: JWT with ADMIN and CLIENT roles, bcrypt passwords, rate limited login
 
-## 🚀 Getting Started Locally
+## What it does
 
-### Prerequisites
-- Node.js v20+
-- Docker Desktop (for MySQL and Redis)
+- Contact form saves leads to the database, emails the team and sends the visitor a confirmation
+- Admin can see stats, manage leads (New, Contacted, Won, Lost), add clients with a portal login, update project milestones and share files
+- Clients log in to see their project timeline, upload and download files and change their password
+- Clients get an email when a milestone moves forward
+- Forgot password sends a reset link that works once and expires in 1 hour
+- Next.js middleware keeps admins and clients on their own pages
 
-### 1. Environment Setup
-Rename the `.env.example` files to `.env` in both the `/frontend` and `/backend` directories. Ensure the variables are populated.
+## Running locally
 
-### 2. Start the Database
-From the root directory, start the Docker containers:
+Needs Node.js 20+.
+
 ```bash
-docker-compose up -d
-```
-
-### 3. Initialize Backend
-Push the Prisma schema to the database and start the server:
-```bash
-cd backend
 npm install
-npx prisma db push
-npx prisma generate
-npm run dev
+cp backend/.env.example backend/.env
+cp frontend/.env.example frontend/.env
 ```
-The backend will run on `http://localhost:5000`.
 
-### 4. Initialize Frontend
-Start the Next.js development server:
+Set `JWT_SECRET`, `ADMIN_EMAIL` and `ADMIN_PASSWORD` in `backend/.env`, then:
+
 ```bash
-cd frontend
-npm install
-npm run dev
+npm run setup      # creates the SQLite database and the admin user
+npm run backend    # http://localhost:5000
+npm run frontend   # http://localhost:3000
 ```
-The frontend will run on `http://localhost:3000`.
 
-## 🚢 Deployment (CI/CD)
+Emails need SMTP details in `backend/.env` (`SMTP_HOST`, `SMTP_USER`, `SMTP_PASS`, `NOTIFY_EMAIL`). A Gmail or Google Workspace account with an app password works. Without them the emails are only printed in the backend console.
 
-The `.github/workflows/main.yml` file is configured to automatically test and build the application on pushes to the `main` branch. 
+Log in at `/login` with the admin email and password from `backend/.env`.
 
-Both the `frontend` and `backend` directories contain optimized `Dockerfile`s ready to be deployed to container registries (AWS ECR, DigitalOcean, Render, etc.).
+## Tests
+
+```bash
+npm test
+```
+
+Runs the API tests in `backend/test` against a separate test database. They cover login, role checks, client and milestone management, file upload and download, leads and password change.
+
+## Deploying
+
+See [DEPLOY.md](DEPLOY.md) for hosting, environment variables and the launch checklist.

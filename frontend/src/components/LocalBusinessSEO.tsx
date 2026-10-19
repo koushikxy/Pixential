@@ -1,46 +1,23 @@
-import React from 'react';
+const siteUrl = process.env.SITE_URL || 'https://pixential.in';
 
-const LocalBusinessSEO = () => {
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Pixential",
-    "image": "https://example.com/logo.png",
-    "url": "https://example.com",
-    "telephone": "+1-234-567-8900",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "123 Agency St",
-      "addressLocality": "Tech City",
-      "addressRegion": "CA",
-      "postalCode": "90210",
-      "addressCountry": "US"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 34.0901,
-      "longitude": -118.4065
-    },
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday"
-      ],
-      "opens": "09:00",
-      "closes": "18:00"
-    }
-  };
-
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
-  );
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Pixential',
+  description: 'Web design and development agency building fast, modern websites for businesses.',
+  url: siteUrl,
+  image: `${siteUrl}/opengraph-image`,
+  email: 'hello@pixential.in',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Koramangala, Bangalore',
+    addressRegion: 'Karnataka',
+    postalCode: '560034',
+    addressCountry: 'IN',
+  },
+  areaServed: 'IN',
 };
 
-export default LocalBusinessSEO;
+export default function LocalBusinessSEO() {
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />;
+}

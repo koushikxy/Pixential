@@ -35,7 +35,6 @@ jobs:
       working-directory: ./backend
       run: npm install
       
-    # Placeholder for running tests
-    # - name: Run Backend Tests
-    #   working-directory: ./backend
-    #   run: npm test
+    - name: Run Backend Tests
+      working-directory: ./backend
+      run: npx prisma generate && npm test

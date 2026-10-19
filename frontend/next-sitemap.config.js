@@ -1,12 +1,9 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.SITE_URL || 'https://example.com',
+  siteUrl: process.env.SITE_URL || 'https://pixential.in',
   generateRobotsTxt: true,
-  sitemapSize: 7000,
-  // Add additional region-specific sitemaps if required
-  // robotsTxtOptions: {
-  //   additionalSitemaps: [
-  //     'https://example.com/sitemap-locations.xml',
-  //   ],
-  // },
+  exclude: ['/admin', '/admin/*', '/client', '/client/*', '/login', '/forgot-password', '/reset-password', '*/opengraph-image*', '/opengraph-image*', '/apple-icon*'],
+  robotsTxtOptions: {
+    policies: [{ userAgent: '*', allow: '/', disallow: ['/admin', '/client', '/login', '/forgot-password', '/reset-password'] }],
+  },
 };

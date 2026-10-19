@@ -33,7 +33,7 @@ export function ThemeToggle() {
         transition={{ type: 'spring', stiffness: 300, damping: 20 }}
         className="absolute"
       >
-        <Sun className="h-[18px] w-[18px] text-gray-700" />
+        <Sun className="h-[1.125rem] w-[1.125rem] text-gray-700" />
       </motion.div>
       <motion.div
         initial={false}
@@ -41,7 +41,7 @@ export function ThemeToggle() {
         transition={{ type: 'spring', stiffness: 300, damping: 20 }}
         className="absolute"
       >
-        <Moon className="h-[18px] w-[18px] text-gray-300" />
+        <Moon className="h-[1.125rem] w-[1.125rem] text-gray-300" />
       </motion.div>
     </motion.button>
   );

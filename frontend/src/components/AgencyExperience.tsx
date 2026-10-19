@@ -4,10 +4,9 @@ import { motion } from 'framer-motion';
 
 export default function AgencyExperience() {
   return (
-    <section className="w-full max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 mb-40 relative z-10">
+    <section className="w-full max-w-[112.5rem] mx-auto px-4 sm:px-6 lg:px-8 mb-40 relative z-10">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
         
-        {/* Sticky Left Column */}
         <div className="lg:col-span-5 relative">
           <div className="lg:sticky top-40">
             <motion.h2 
@@ -29,7 +28,7 @@ export default function AgencyExperience() {
                 <div className="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-br from-gray-400 to-gray-200 dark:from-gray-600 dark:to-gray-800 pr-8 pb-2 inline-block">
                   100%
                 </div>
-                <div className="text-xl md:text-2xl font-bold leading-tight max-w-[200px] text-gray-800 dark:text-gray-200">
+                <div className="text-xl md:text-2xl font-bold leading-tight max-w-[12.5rem] text-gray-800 dark:text-gray-200">
                   Hand-coded. <br />
                   Zero boring templates.
                 </div>
@@ -38,10 +37,8 @@ export default function AgencyExperience() {
           </div>
         </div>
 
-        {/* Scrolling Right Column (The "How We Do It") */}
         <div className="lg:col-span-7 space-y-16 mt-12 lg:mt-0">
           
-          {/* Card 1 */}
           <motion.div 
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -50,7 +47,6 @@ export default function AgencyExperience() {
           >
             <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             
-            {/* Interactive abstract wireframe inside the card */}
             <div className="absolute top-0 right-0 w-64 h-64 opacity-20 pointer-events-none overflow-hidden translate-x-1/3 -translate-y-1/3">
               <motion.div 
                 animate={{ rotate: 360 }} 
@@ -76,7 +72,6 @@ export default function AgencyExperience() {
             </div>
           </motion.div>
 
-          {/* Card 2 */}
           <motion.div 
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -85,7 +80,6 @@ export default function AgencyExperience() {
           >
             <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             
-            {/* Code Block Visual inside the card */}
             <div className="absolute top-10 right-10 w-48 h-48 opacity-10 md:opacity-20 pointer-events-none group-hover:scale-110 transition-transform duration-700">
               <div className="w-full h-full bg-black rounded-xl border border-white/10 p-4 flex flex-col gap-2 transform rotate-12">
                 <div className="flex gap-1.5 mb-1">
@@ -113,7 +107,6 @@ export default function AgencyExperience() {
             </div>
           </motion.div>
 
-          {/* Card 3 */}
           <motion.div 
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -122,7 +115,6 @@ export default function AgencyExperience() {
           >
             <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             
-            {/* Handshake/Teamwork Abstract inside the card */}
             <div className="absolute -bottom-10 -right-10 w-64 h-64 opacity-20 pointer-events-none">
               <motion.div 
                 animate={{ x: [0, 10, 0] }} 

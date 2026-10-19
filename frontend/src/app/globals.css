@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @layer base {
   :root {
     --background: #ffffff;
@@ -15,13 +11,46 @@
     --background: #000000;
     --foreground: #f4f4f5;
   }
+
+  @media (min-width: 1280px) {
+    html {
+      font-size: 87.5%;
+    }
+  }
+  @media (min-width: 1536px) {
+    html {
+      font-size: 80%;
+    }
+  }
+  html:has(.portal) {
+    font-size: 100%;
+  }
+}
+
+@layer utilities {
+  .glow {
+    -webkit-mask-image: radial-gradient(closest-side, #000, transparent);
+    mask-image: radial-gradient(closest-side, #000, transparent);
+  }
+}
+
+html,
+body {
+  overflow-x: clip;
 }
 
 body {
-  @apply bg-[var(--background)] text-[var(--foreground)] transition-colors duration-300;
+  @apply bg-[var(--background)] text-[var(--foreground)];
 }
 
-/* Custom Scrollbar to match the creative theme */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -43,12 +72,11 @@ body {
   background: linear-gradient(to bottom, #1d4ed8, #0e7490);
 }
 
-/* Premium Text Selection */
 ::selection {
-  background: rgba(37, 99, 235, 0.2); /* Subtle blue */
+  background: rgba(37, 99, 235, 0.2);
   color: inherit;
 }
 .dark ::selection {
-  background: rgba(6, 182, 212, 0.3); /* Subtle cyan */
+  background: rgba(6, 182, 212, 0.3);
   color: inherit;
 }

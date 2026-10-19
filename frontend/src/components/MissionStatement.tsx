@@ -4,10 +4,9 @@ import { motion } from 'framer-motion';
 
 export default function MissionStatement() {
   return (
-    <section className="w-full max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 mb-40 relative z-10 pt-20">
+    <section className="w-full max-w-[112.5rem] mx-auto px-4 sm:px-6 lg:px-8 mb-40 relative z-10 pt-20">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
         
-        {/* Left Column: Label */}
         <div className="lg:col-span-4 relative">
           <div className="lg:sticky top-40">
             <span className="text-blue-600 dark:text-cyan-400 font-bold tracking-widest uppercase mb-4 block">
@@ -17,7 +16,6 @@ export default function MissionStatement() {
           </div>
         </div>
 
-        {/* Right Column: Massive Raw Typography */}
         <div className="lg:col-span-8">
           
           <motion.div 
@@ -30,10 +28,9 @@ export default function MissionStatement() {
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-black dark:text-white leading-tight tracking-tight">
               We started Pixential because we were tired of seeing amazing businesses settling for <br className="hidden md:block"/>
               <span className="relative inline-block mt-2">
-                <span className="relative z-10 line-through decoration-red-500 decoration-[4px] md:decoration-[6px] text-gray-400 dark:text-gray-600">
+                <span className="relative z-10 line-through decoration-red-500 decoration-[0.25rem] md:decoration-[0.375rem] text-gray-400 dark:text-gray-600">
                   slow, boring websites.
                 </span>
-                {/* Creative raw visual element */}
                 <motion.span 
                   animate={{ rotate: [0, -10, 0] }}
                   transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}

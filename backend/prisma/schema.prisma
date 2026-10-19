@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -11,38 +11,76 @@ model User {
   id        String   @id @default(uuid())
   email     String   @unique
   password  String
-  role      Role     @default(GUEST)
+  name      String?
+  role      String   @default("CLIENT")
+  resetToken   String?   @unique
+  resetExpires DateTime?
+  client    Client?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  clients   Client[]
 }
 
 model Client {
-  id          String   @id @default(uuid())
-  name        String
-  userId      String
-  user        User     @relation(fields: [userId], references: [id])
-  locations   Location[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id         String      @id @default(uuid())
+  name       String
+  phone      String?
+  website    String?
+  userId     String?     @unique
+  user       User?       @relation(fields: [userId], references: [id])
+  locations  Location[]
+  milestones Milestone[]
+  files      File[]
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
 }
 
 model Location {
-  id          String   @id @default(uuid())
-  address     String
-  city        String
-  state       String
-  zip         String
-  lat         Float?
-  lng         Float?
-  clientId    String
-  client      Client   @relation(fields: [clientId], references: [id])
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id        String   @id @default(uuid())
+  address   String
+  city      String
+  state     String
+  zip       String
+  lat       Float?
+  lng       Float?
+  clientId  String
+  client    Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-enum Role {
-  ADMIN
-  CLIENT
-  GUEST
+model Milestone {
+  id          String    @id @default(uuid())
+  title       String
+  description String?
+  status      String    @default("PENDING")
+  dueDate     DateTime?
+  position    Int       @default(0)
+  clientId    String
+  client      Client    @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model File {
+  id         String   @id @default(uuid())
+  name       String
+  key        String   @unique
+  size       Int
+  mimeType   String
+  uploadedBy String
+  clientId   String
+  client     Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+}
+
+model Lead {
+  id        String   @id @default(uuid())
+  firstName String
+  lastName  String
+  email     String
+  budget    String?
+  message   String
+  status    String   @default("NEW")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

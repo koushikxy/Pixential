@@ -17,14 +17,12 @@ export default function AboutPage() {
     <div className="min-h-screen flex flex-col bg-transparent font-sans selection:bg-blue-500/30 selection:text-white transition-colors duration-500">
       <Navbar />
       
-      <main className="flex-grow pt-40">
-        {/* Header Section */}
-        <section className="relative w-full max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 mb-40 z-10 min-h-[50vh] flex flex-col justify-center text-center items-center">
+      <main className="flex-grow pt-32 md:pt-40">
+        <section className="relative w-full max-w-[112.5rem] mx-auto px-4 sm:px-6 lg:px-8 mb-20 md:mb-40 z-10 md:min-h-[50vh] flex flex-col justify-center text-center items-center">
           
-          {/* Creative Gradient Mesh Background (Matched to Homepage) */}
           <div className="absolute inset-0 w-full h-full pointer-events-none -z-10">
-            <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-purple-300 dark:bg-indigo-600 rounded-full mix-blend-multiply dark:mix-blend-normal filter blur-[128px] opacity-60 dark:opacity-30 animate-pulse transition-colors duration-500"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-blue-300 dark:bg-cyan-600 rounded-full mix-blend-multiply dark:mix-blend-normal filter blur-[128px] opacity-60 dark:opacity-30 transition-colors duration-500"></div>
+            <div className="absolute top-1/4 left-1/4 w-[min(31.25rem,80vw)] h-[min(31.25rem,80vw)] bg-purple-300 dark:bg-indigo-600 rounded-full opacity-60 dark:opacity-30 glow"></div>
+            <div className="absolute bottom-1/4 right-1/4 w-[min(31.25rem,80vw)] h-[min(31.25rem,80vw)] bg-blue-300 dark:bg-cyan-600 rounded-full opacity-60 dark:opacity-30 transition-colors duration-500 glow"></div>
           </div>
 
           <div className="max-w-5xl relative z-10">
@@ -45,19 +43,16 @@ export default function AboutPage() {
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
               className="flex justify-center gap-4 flex-wrap mt-8"
             >
-              <div className="px-6 py-3 rounded-full border border-black/10 dark:border-white/10 text-xl font-bold bg-white/50 dark:bg-black/50 backdrop-blur-md">No Templates.</div>
-              <div className="px-6 py-3 rounded-full border border-black/10 dark:border-white/10 text-xl font-bold bg-white/50 dark:bg-black/50 backdrop-blur-md">No Excuses.</div>
-              <div className="px-6 py-3 rounded-full border border-black/10 dark:border-white/10 text-xl font-bold bg-white/50 dark:bg-black/50 backdrop-blur-md">Just Results.</div>
+              <div className="px-6 py-3 rounded-full border border-black/10 dark:border-white/10 text-base md:text-xl font-bold bg-white/50 dark:bg-black/50">No Templates.</div>
+              <div className="px-6 py-3 rounded-full border border-black/10 dark:border-white/10 text-base md:text-xl font-bold bg-white/50 dark:bg-black/50">No Excuses.</div>
+              <div className="px-6 py-3 rounded-full border border-black/10 dark:border-white/10 text-base md:text-xl font-bold bg-white/50 dark:bg-black/50">Just Results.</div>
             </motion.div>
           </div>
         </section>
 
-        {/* Mission / Who We Are Section */}
         <MissionStatement />
 
-        {/* Philosophy Section (Interactive Scroll) */}
         <AgencyExperience />
-        {/* Bento Box Values Grid */}
         <BentoValues />
 
         <FAQ />

@@ -7,3 +7,10 @@ dist/
 .DS_Store
 .env.*
 !.env.example
+backend/uploads/
+*.db
+*.db-journal
+backend/logs/
+*.tsbuildinfo
+frontend/public/sitemap*.xml
+frontend/public/robots.txt

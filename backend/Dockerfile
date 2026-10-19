@@ -7,8 +7,7 @@ RUN npm install --production
 
 COPY . .
 
-# Generate Prisma client if schema exists
-# RUN npx prisma generate
+RUN npx prisma generate
 
 EXPOSE 5000
 

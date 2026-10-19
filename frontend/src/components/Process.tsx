@@ -32,7 +32,7 @@ const itemVariants = {
 export default function Process() {
   return (
     <section className="py-24 bg-transparent relative z-10 transition-colors duration-500">
-      <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <div className="w-full max-w-[112.5rem] mx-auto px-4 sm:px-6 lg:px-8 mb-20">
         <motion.h2 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -45,7 +45,7 @@ export default function Process() {
         </motion.h2>
       </div>
 
-      <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[112.5rem] mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           variants={containerVariants}
           initial="hidden"

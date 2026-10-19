@@ -1,21 +1,19 @@
 'use client';
 
 import React, { useRef } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   
-  // Mouse tracking for parallax
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   
-  // Smooth spring physics for mouse
   const springX = useSpring(mouseX, { stiffness: 100, damping: 30, mass: 1 });
   const springY = useSpring(mouseY, { stiffness: 100, damping: 30, mass: 1 });
 
-  // Floating elements transformations
   const floatX1 = useTransform(springX, [-0.5, 0.5], [-40, 40]);
   const floatY1 = useTransform(springY, [-0.5, 0.5], [-40, 40]);
   
@@ -46,25 +44,24 @@ export default function Hero() {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative min-h-screen flex items-start justify-center overflow-hidden pt-[200px] md:pt-[250px] bg-transparent transition-colors duration-500 perspective-1000"
+      className="relative sm:min-h-screen pb-20 sm:pb-0 flex items-start justify-center overflow-hidden pt-36 sm:pt-[12.5rem] md:pt-[15.625rem] bg-transparent transition-colors duration-500 perspective-1000"
     >
-      {/* Creative Gradient Mesh Background */}
       <div className="absolute inset-0 w-full h-full pointer-events-none -z-10">
         <motion.div 
           style={{ x: floatX1, y: floatY1 }}
-          className="absolute top-1/4 left-1/4 w-[40vw] h-[40vw] max-w-[600px] max-h-[600px] bg-purple-400 dark:bg-indigo-600 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-[100px] md:blur-[140px] opacity-50 dark:opacity-40 animate-[spin_10s_linear_infinite]"
+          className="absolute top-1/4 left-1/4 w-[40vw] h-[40vw] max-w-[37.5rem] max-h-[37.5rem] bg-purple-400 dark:bg-indigo-600 rounded-full opacity-50 dark:opacity-40 glow"
         />
         <motion.div 
           style={{ x: floatX2, y: floatY2 }}
-          className="absolute bottom-1/4 right-1/4 w-[40vw] h-[40vw] max-w-[600px] max-h-[600px] bg-blue-400 dark:bg-cyan-600 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-[100px] md:blur-[140px] opacity-50 dark:opacity-40 animate-[spin_15s_linear_infinite_reverse]"
+          className="absolute bottom-1/4 right-1/4 w-[40vw] h-[40vw] max-w-[37.5rem] max-h-[37.5rem] bg-blue-400 dark:bg-cyan-600 rounded-full opacity-50 dark:opacity-40 glow"
         />
       </div>
 
-      {/* Floating 3D Assets / Cards for Parallax Effect */}
       <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
-        {/* Massive Background Typography */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center mix-blend-overlay dark:mix-blend-color-dodge opacity-20 dark:opacity-10 select-none">
-          <h2 className="text-[20vw] font-display font-black tracking-tighter whitespace-nowrap">PIXENTIAL</h2>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full hidden sm:flex items-center justify-center mix-blend-overlay dark:mix-blend-color-dodge opacity-15 dark:opacity-10 select-none pointer-events-none px-4">
+          <h2 className="text-[9vw] sm:text-[10vw] font-display font-black tracking-normal leading-none uppercase text-center w-full">
+            PIXENTIAL
+          </h2>
         </div>
 
         <motion.div 
@@ -72,7 +69,7 @@ export default function Hero() {
           className="absolute top-[15%] left-[5%] md:top-[20%] md:left-[10%] w-32 h-48 md:w-48 md:h-64 rounded-3xl bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/20 dark:border-white/10 shadow-2xl overflow-hidden hidden sm:block"
         >
           <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-purple-500/20 mix-blend-overlay"></div>
-          <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=400&auto=format&fit=crop" alt="Abstract" className="w-full h-full object-cover opacity-80 mix-blend-overlay"/>
+          <Image priority fill sizes="15rem" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=400&auto=format&fit=crop" alt="" className="object-cover opacity-80 mix-blend-overlay"/>
         </motion.div>
 
         <motion.div 
@@ -84,24 +81,21 @@ export default function Hero() {
         </motion.div>
       </div>
       
-      {/* Main Content */}
-      <div className="relative z-10 w-full max-w-[1800px] mx-auto px-4 text-center">
+      <div className="relative z-10 w-full max-w-[112.5rem] mx-auto px-4 text-center">
         
-        {/* Animated Badge */}
         <motion.div
           initial={{ opacity: 0, y: 50, scale: 0.8 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, type: "spring", bounce: 0.5 }}
-          className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-black/10 dark:border-white/10 bg-white/60 dark:bg-black/60 backdrop-blur-xl mb-10 shadow-lg hover:shadow-xl hover:scale-105 transition-all cursor-pointer"
+          className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-black/10 dark:border-white/10 bg-white/60 dark:bg-black/60 backdrop-blur-xl mb-8 sm:mb-10 shadow-lg"
         >
           <span className="relative flex h-3 w-3">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
           </span>
-          <span className="text-sm font-bold text-gray-800 dark:text-gray-200 tracking-widest uppercase">Accepting projects for Q4</span>
+          <span className="text-xs sm:text-sm font-bold text-gray-800 dark:text-gray-200 tracking-widest uppercase">Accepting new projects</span>
         </motion.div>
 
-        {/* Word-by-word staggered heading */}
         <h1 className="text-[12vw] sm:text-6xl md:text-[8rem] lg:text-[10rem] font-display font-bold text-black dark:text-white tracking-tighter leading-[0.85] mb-8 overflow-hidden">
           <motion.div 
             initial="hidden"
@@ -137,14 +131,13 @@ export default function Hero() {
           </motion.div>
         </h1>
         
-        {/* Animated Tags */}
         <motion.div
           initial="hidden"
           animate="visible"
           variants={{
             visible: { transition: { staggerChildren: 0.1, delayChildren: 0.8 } }
           }}
-          className="flex flex-wrap justify-center gap-4 mb-14"
+          className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-10 sm:mb-14"
         >
           {['Lightning Fast', 'Stunning Design', 'Conversion Focused'].map((tag, i) => (
              <motion.span 
@@ -153,15 +146,13 @@ export default function Hero() {
                  hidden: { opacity: 0, scale: 0.5 },
                  visible: { opacity: 1, scale: 1, transition: { type: "spring", duration: 0.8 } }
                }}
-               whileHover={{ scale: 1.1, rotate: [-2, 2, 0] }}
-               className="px-6 py-3 rounded-full border border-gray-200 dark:border-white/10 text-sm font-bold text-gray-700 dark:text-gray-300 tracking-widest uppercase bg-white/30 dark:bg-white/5 backdrop-blur-md cursor-pointer shadow-sm hover:shadow-md hover:bg-white/80 dark:hover:bg-white/20 transition-colors"
+               className="px-4 py-2 sm:px-6 sm:py-3 rounded-full border border-gray-200 dark:border-white/10 text-xs sm:text-sm font-bold text-gray-700 dark:text-gray-300 tracking-wider sm:tracking-widest uppercase bg-white/30 dark:bg-white/5 shadow-sm"
              >
                {tag}
              </motion.span>
           ))}
         </motion.div>
         
-        {/* Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
