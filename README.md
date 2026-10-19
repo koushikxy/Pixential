@@ -2,6 +2,8 @@
 
 Website and client portal for Pixential, a web agency. The public site shows services, work and pricing. Behind the login there is an admin panel for managing clients and leads, and a portal where each client can follow their project and share files.
 
+Live site: https://pixential.netlify.app (front end only for now. Until the backend is hosted, the contact form goes to Netlify Forms and the login links are hidden.)
+
 ## Stack
 
 - Frontend: Next.js 14.2 (App Router), Tailwind CSS, Framer Motion
